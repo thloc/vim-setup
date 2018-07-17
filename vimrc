@@ -3,6 +3,18 @@ set autoread
 set autowrite
 set encoding=utf-8 nobomb
 
+syntax on
+
+if !has('gui_running')
+  set t_Co=256
+endif
+
+if has('mouse')
+  set mouse=a
+endif
+
+
+" NERDTree plugin
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp', '\.git', 'node_modules', 'venv']
 let NERDTreeMinimalUI = 1
@@ -12,10 +24,8 @@ let NERDTreeAutoDeleteBuffer = 1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-if !has('gui_running')
-  set t_Co=256
-endif
 
+" lightline.vim plugin
 let g:lightline = {
 \ 'colorscheme': 'powerline',
 \ 'active': {
@@ -61,3 +71,4 @@ function! LightlineLinterOK() abort
   let l:all_non_errors = l:counts.total - l:all_errors
   return l:counts.total == 0 ? '✓ ' : ''
 endfunction
+
